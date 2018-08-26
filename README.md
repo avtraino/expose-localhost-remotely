@@ -42,7 +42,7 @@ Host awsredirect
     Port 22
     IdentityFile <path-to-pem>
     IdentitiesOnly yes 
-    RemoteForward 80 127.0.0.1:8000  # change 8000 to port you want to serve.
+    RemoteForward 80 127.0.0.1:8000  # change `8000` to port you want to serve.
     			  	      # it will still forward to server's port 80                     
 Host aws
     Hostname  <serverip>
@@ -60,7 +60,7 @@ Host aws
 ## root user's .bashrc
 ```
 if [[-n $SSH_CONNECTION]] ; then
-	service apache2 stop    # this stops apache so the tunnel can be served on port 80
+	service apache2 stop    #  stop apache so the tunnel can be served on port 80
 fi
 ```
 
