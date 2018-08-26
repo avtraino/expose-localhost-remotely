@@ -42,7 +42,7 @@ Host awsredirect
     Port 22
     IdentityFile <path-to-pem>
     IdentitiesOnly yes 
-    RemoteForward 80 127.0.0.1:8000  # change `8000` to port you want to serve.
+    RemoteForward 80 127.0.0.1:8000  # change 8000 to port you want to serve.
     			  	      # it will still forward to server's port 80                     
 Host aws
     Hostname  <serverip>
