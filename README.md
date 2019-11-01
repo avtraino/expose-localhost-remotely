@@ -1,10 +1,10 @@
 # expose-localhost-remotely
 
-These bash functions and config edits work together
-to serve your localhost over the internet using
-SSH remote port forwarding. 
+These bash functions and config edits work together to securely
+**serve your localhost over the internet**
+using SSH remote port forwarding. 
  
-This method requires two remote users and root access to a remote server with port 80 open, however:
+Note: this method requires two remote users and root access to a remote server with port 80 open, however:
 - Using root is only required in this example because root is 
 [required](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html)
 to bind to port 80. If you don't mind serving on a different port (e.g., 8080), 
@@ -13,14 +13,14 @@ non-root users can bind to ports above the 0-1023 range.
 (as well as editing the .bashrc files for those users)
 is only required in this example because the port I want to bind to (80)
 is usually occupied by an apache web server. If the binding port isn't 
-already occupied, this method can be edited to require only one user. 
+already occupied, this method can be modified to require only one user. 
 
 
 
 
-# Local Machine  
-## .bashrc functions
-```
+## Local Machine  
+### .bashrc functions
+```bash
 function rediron() {
 	tmux kill-session -t redir;
 	tmux new-session -t redir -d;
@@ -43,8 +43,8 @@ function rediroff() {
 }
 ```
 
-## ssh_config entries
-```
+### ssh_config entries
+```bash
 Host awsredirect
     Hostname  <serverip>
     User root
@@ -63,19 +63,19 @@ Host aws
 
 
 
-#  Remote Server
-## sshd_config
+##  Remote Server
+### sshd_config
 `GatewayPorts yes #allow remote port forwarding`
 
-## root user's .bashrc
-```
+### root user's .bashrc
+```bash
 if [[-n $SSH_CONNECTION]] ; then
 	service apache2 stop    #  stop apache so the tunnel can be served on port 80
 fi
 ```
 
-## standard user's .bashrc
-```
+### standard user's .bashrc
+```bash
 if [[-n $SSH_CONNECTION]] ; then
 	service apache2 start   # re-start apache after tunnel closes
 fi
