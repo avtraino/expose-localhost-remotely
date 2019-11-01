@@ -1,16 +1,25 @@
 # expose-localhost-remotely
 
+These bash functions and config edits work together
+to serve your localhost over the internet using
+SSH remote port forwarding. 
+ 
+This method requires two remote users and root access to a remote server with port 80 open, however:
+- Using root is only required in this example because root is 
+[required](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html)
+to bind to port 80. If you don't mind serving on a different port (e.g., 8080), 
+non-root users can bind to ports above the 0-1023 range. 
+- Using two separate users on the remote server 
+(as well as editing the .bashrc files for those users)
+is only required in this example because the port I want to bind to (80)
+is usually occupied by an apache web server. If the binding port isn't 
+already occupied, this method can be edited to require only one user. 
 
 
- These bash functions and config edits work together
- to serve your localhost over the internet using
- remote port forwarding. This requires only your 
- local machine and a remote machine with port 80 open.
 
 
-
-## Local Machine  
-### .bashrc functions
+# Local Machine  
+## .bashrc functions
 ```
 function rediron() {
 	tmux kill-session -t redir;
@@ -53,7 +62,8 @@ Host aws
 ```
 
 
-#  Remote Machine
+
+#  Remote Server
 ## sshd_config
 `GatewayPorts yes #allow remote port forwarding`
 
@@ -70,3 +80,6 @@ if [[-n $SSH_CONNECTION]] ; then
 	service apache2 start   # re-start apache after tunnel closes
 fi
 ```
+
+
+
