@@ -69,14 +69,14 @@ Host aws
 
 ### root user's .bashrc
 ```bash
-if [[-n $SSH_CONNECTION]] ; then
+if [[ -n $SSH_CONNECTION ]] ; then
 	service apache2 stop    #  stop apache so the tunnel can be served on port 80
 fi
 ```
 
 ### standard user's .bashrc
 ```bash
-if [[-n $SSH_CONNECTION]] ; then
+if [[ -n $SSH_CONNECTION ]] ; then
 	service apache2 start   # re-start apache after tunnel closes
 fi
 ```
