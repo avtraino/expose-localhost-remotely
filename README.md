@@ -77,7 +77,7 @@ fi
 ### standard user's .bashrc
 ```bash
 if [[ -n $SSH_CONNECTION ]] ; then
-	service apache2 start   # re-start apache after tunnel closes
+	sudo service apache2 start   # re-start apache after tunnel closes
 fi
 ```
 
